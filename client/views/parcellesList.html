@@ -1,0 +1,21 @@
+<template name="parcelleList">
+		<h2 class="ui header">
+			Vos Parcelles
+			<!-- <div class="sub header">Manage your account settings and set e-mail preferences.</div> -->
+		</h2>
+		<div class="ui basic segment">
+			<div class="ui relaxed celled list">
+				{{#each parcelles}}
+				<div class="item">
+					<div class="content">
+						<a href="/parcelle/{{this._id}}" class="header">
+							{{this.attributes.Name}}
+
+						</a>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+	</div>
+
+</template>

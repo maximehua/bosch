@@ -1,0 +1,13 @@
+<template name="meteo">
+	<h2 class="ui header">
+		<i  class="back left chevron icon"><a href="/parcelle/{{parcelle._id}}"></a></i>
+		<div class="content">
+			Hygrometrie
+			<div class="sub header">{{parcelle.attributes.Name}}</div>
+		</div>
+	</h2>
+	<div class="ui basic segment">
+		{{> c3 myChartData}}
+	</div>
+
+</template>
