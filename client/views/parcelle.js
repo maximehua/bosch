@@ -2,7 +2,7 @@ Template.parcelle.helpers({
     parcelle: function(){
         Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
         var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
-        console.log(parcelle);
+
         return parcelle && parcelle;
     }
 

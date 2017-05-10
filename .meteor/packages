@@ -41,3 +41,5 @@ accounts-ui@1.1.9
 http@1.2.12
 less@2.7.9
 gorillastack:c3
+momentjs:moment
+fullcalendar:fullcalendar
