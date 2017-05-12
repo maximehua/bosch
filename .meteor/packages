@@ -25,12 +25,9 @@ es5-shim@4.6.15
 standard-minifier-js@2.0.0
 kadira:flow-router
 kadira:blaze-layout
-ahref:dragula
-fourquet:serialport
 meyerweb-reset@1.0.7
 fortawesome:fontawesome
 numeral:numeral
-mystor:device-detection
 mongo@1.1.17
 shell-server@0.2.3
 semantic:ui
