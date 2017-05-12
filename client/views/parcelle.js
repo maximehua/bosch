@@ -1,9 +1,31 @@
 Template.parcelle.helpers({
-    parcelle: function(){
+    parcelle: ()=>{
         Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
+        Meteor.call("getParcellePhotos",FlowRouter.getParam("id"));
         var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
 
         return parcelle && parcelle;
+    },
+    tab : ()=>{
+        var tab = {
+            first : "",
+            second : "",
+            third : "",
+        };
+        if (Session.get("tab") === "first") {
+            tab.first = "active";
+        };
+        if (Session.get("tab") === "second") {
+            tab.second = "active";
+        };
+        if (Session.get("tab") === "third") {
+            tab.third = "active";
+        };
+        return tab;
+    },
+    photo: ()=>{
+        var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
+        return parcelle && parcelle.photos[0];
     }
 
 });
@@ -12,16 +34,19 @@ Template.parcelle.onRendered(()=>{
     Meteor.setTimeout(()=>{
         $('#menu-onglet .item').tab();
         $('#stade-compteur')
-          .progress({
+        .progress({
             label: 'ratio',
             text: {
-              ratio: '{left}'
+                ratio: '{left}'
             }
         });
     },100);
 })
 //
-//
-// Template.layout.events({
-//
-// })
+
+Template.parcelle.events({
+    'click .menuTab'(event) {
+        const target = event.target;
+        Session.set("tab",$(target).attr('data-tab'));
+    }
+})

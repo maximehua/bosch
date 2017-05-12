@@ -1,6 +1,3 @@
-// import moment from 'moment';
-
-
 Template.meteo.helpers({
     parcelle: function(){
         Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
@@ -14,7 +11,8 @@ Template.meteo.helpers({
         console.log(parcelle);
 
         if ( typeof parcelle !== "undefined") {
-            var filtered = parcelle.data.filter((d)=>{ return moment(d.timestamp).isSame("2017-03-22", 'day')  })
+            console.log(Session.get("day"));
+            var filtered = parcelle.data.filter((d)=>{ return moment(d.timestamp).isSame(Session.get("day"), 'day')  })
             var data = {
                 value : [],
                 time : [],
@@ -26,19 +24,19 @@ Template.meteo.helpers({
             _.each(filtered, (element, index, list)=>{
                 if (typeof element.values[capteur] !== "undefined") {
                     data.value.push(element.values[capteur]);
-                    data.time.push(moment.utc(element.timestamp).hours());
+                    data.time.push(moment.utc(element.timestamp)._d);
                 }
 
             })
             data.value.unshift('value');
-            // data.time.unshift('x');
-
+            data.time.unshift('x');
+            console.log(data);
 
             return {
                 data: {
-                    // x : "x",
+                    x : "x",
                     columns: [
-                        // data.time,
+                        data.time,
                         data.value,
                     ],
                     type: "spline",
@@ -52,19 +50,14 @@ Template.meteo.helpers({
                 },
                 axis: {
                     x: {
-                        type: 'category',
-                        categories: data.time,
-                        // tick: {
-                        //     culling: {
-                        //         max: 4 // the number of tick texts will be adjusted to less than this value
-                        //     }
-                        // }
+                        type: 'timeseries',
+                        tick: {
+                            format: '%HH',
+                            culling: {
+                                max: 4 // the number of tick texts will be adjusted to less than this value
+                            }
+                        }
                     },
-                    // y: {
-                    //     tick: {
-                    //         count:  8,
-                    //     }
-                    // }
                 },
                 zoom: {
                     enabled: true
@@ -88,7 +81,17 @@ Template.meteo.onRendered(()=>{
     Meteor.setTimeout(()=>{
 
         $('#calendar').fullCalendar({
-    // put your options and callbacks here
+            currentDay : Session.get("day"),
+            dayClick: function(date, jsEvent, view) {
+                if ( !$(jsEvent.target).hasClass("fc-future") ) {
+
+                $(".fc-state-highlight").removeClass("fc-state-highlight");
+                console.log($(jsEvent.target));
+                $("td[data-date="+date.format('YYYY-MM-DD')+"]").addClass("fc-state-highlight");
+                Session.set("day", date.format());
+
+                }
+            }
         })
     },100);
 })
