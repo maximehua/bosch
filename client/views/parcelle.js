@@ -24,8 +24,9 @@ Template.parcelle.helpers({
         return tab;
     },
     photo: ()=>{
-        var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
-        return parcelle && parcelle.photos[0];
+        // var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
+        // return parcelle && parcelle.photos[0];
+        return Images.find();
     }
 
 });
