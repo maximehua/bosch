@@ -27,7 +27,6 @@ kadira:flow-router
 kadira:blaze-layout
 meyerweb-reset@1.0.7
 fortawesome:fontawesome
-numeral:numeral
 mongo@1.1.17
 shell-server@0.2.3
 semantic:ui
@@ -38,8 +37,6 @@ gorillastack:c3
 momentjs:moment
 fullcalendar:fullcalendar
 msavin:jetsetter
-cfs:s3
 cfs:filesystem
 cfs:collection
 cfs:standard-packages
-cfs:gridfs

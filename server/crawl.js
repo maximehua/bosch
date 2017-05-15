@@ -12,6 +12,15 @@ Meteor.methods({
         var urlquest='http://pa.apps.bosch-iot-cloud.com/api/v1/modules?page=0&size=100';
         var user = Meteor.settings.USER;
         var password = Meteor.settings.PASSWORD;
+
+        if (typeof(user) === 'undefined') {
+            user = process.env.USER;
+            password = process.env.PASSWORD;
+            console.log(user,passord);
+
+        }
+
+
         var auth = user+":"+password;
 
         console.log(urlquest);
