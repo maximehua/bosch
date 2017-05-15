@@ -40,30 +40,33 @@ Template.meteo.helpers({
             console.log(data);
 
             return {
-                size: {
-                    height: 600,
+                point: {
+                  show: false
+              },
+              size: {
+                height: 600,
+            },
+            data: {
+                x : "x",
+                columns: [
+                data.time,
+                data.value,
+                ],
+                type: "spline",
+                colors: {
+                    value: '#efb156',
+                    x: '#efb156',
                 },
-                data: {
-                    x : "x",
-                    columns: [
-                        data.time,
-                        data.value,
-                    ],
-                    type: "spline",
-                    colors: {
-                        value: '#efb156',
-                        x: '#efb156',
-                    },
-                },
-                legend: {
-                    show: false,
-                },
-                axis: {
-                    x: {
-                        type: 'timeseries',
-                        tick: {
-                            format: '%H h',
-                            culling: {
+            },
+            legend: {
+                show: false,
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%H h',
+                        culling: {
                                 max: 6 // the number of tick texts will be adjusted to less than this value
                             }
                         }
@@ -72,8 +75,7 @@ Template.meteo.helpers({
                 tooltip: {
                     format: {
                         value: function (value, ratio, id) {
-                            var format = id === 'value' ? d3.format(',') : d3.format('$');
-                            return format(value);
+                            return value.toFixed(2)+"%";
                         }
                     }
                 }
@@ -94,10 +96,10 @@ Template.meteo.onRendered(()=>{
             dayClick: function(date, jsEvent, view) {
                 if ( !$(jsEvent.target).hasClass("fc-future") ) {
 
-                $(".fc-state-highlight").removeClass("fc-state-highlight");
-                console.log($(jsEvent.target));
-                $("td[data-date="+date.format('YYYY-MM-DD')+"]").addClass("fc-state-highlight");
-                Session.set("day", date.format());
+                    $(".fc-state-highlight").removeClass("fc-state-highlight");
+                    console.log($(jsEvent.target));
+                    $("td[data-date="+date.format('YYYY-MM-DD')+"]").addClass("fc-state-highlight");
+                    Session.set("day", date.format());
 
                 }
             }

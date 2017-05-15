@@ -1,6 +1,6 @@
 
 html{
-    font-size: 32px;
+    font-size: 40px;
 }
 
 // Layout
@@ -79,6 +79,8 @@ top: 0; bottom: 0; left: 0; right: 0;
 }
 .fc-view-container{
     background: white;
+    position: relative;
+    top: -1rem;
 }
 
 .fc-day-grid-container{
@@ -88,6 +90,17 @@ top: 0; bottom: 0; left: 0; right: 0;
 .fc-future {
     color: rgba(0,0,0,0.2);
 }
+.fc-toolbar{
+    margin-bottom: 1em;
+    position: relative;
+    background: white;
+    left: -1rem;
+    top: -1rem;
+    right: -1rem;
+    padding: 1rem;
+    width: ~"calc(100% + 2rem)";    
+}
+
 
 // Helpers
 
@@ -116,15 +129,23 @@ top: 0; bottom: 0; left: 0; right: 0;
     right: 0;
 }
 .c3-tooltip-container{
-    top: -200px !important;
+    top: 0px !important;
+    border-radius: 500rem;
+    overflow: hidden;
+    height: 200px !important;
+    width: 200px !important;
     .c3-tooltip{
-        height: 100px !important;
-        width: 300px !important;
+        height: 200px !important;
+        width: 200px !important;
+    }
+    .name{
+        display: none;
     }
     th, td {
         font-size: 1rem;
         padding: 1rem;
         border: none;
+        text-align: center;
     }
     th {
         background: #60b3c6;
@@ -134,7 +155,9 @@ top: 0; bottom: 0; left: 0; right: 0;
         border: none;
     }
 }
-
+.c3-line {
+    stroke-width: 10px !important;
+}
 .noData{
     text-align: center;
     color: white;
@@ -146,3 +169,4 @@ top: 0; bottom: 0; left: 0; right: 0;
     background: rgba(0, 0, 0, 0.8);
 
 }
+
