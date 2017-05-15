@@ -16,7 +16,7 @@ Meteor.methods({
         if (typeof(user) === 'undefined') {
             user = process.env.USER;
             password = process.env.PASSWORD;
-            console.log(user,passord);
+            console.log(user,password);
 
         }
 
@@ -65,6 +65,13 @@ Meteor.methods({
         var urlquest='http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/history?start=2010-01-1T10:45:27.00Z&end=2020-01-1T10:45:26.00Z';
         var user = Meteor.settings.USER;
         var password = Meteor.settings.PASSWORD;
+
+        if (typeof(user) === 'undefined') {
+            user = process.env.USER;
+            password = process.env.PASSWORD;
+            console.log(user,password);
+
+        }
         var auth = user+":"+password;
 
         console.log(urlquest);
