@@ -97,11 +97,9 @@
 		</div>
 		<div class="ui tab basic segment {{tab.second}}" data-tab="second">
 
-			<img class="ui fluid image" src="http://pa.apps.bosch-iot-cloud.com/api/v1/modules/{{photo.id}}/images/{{photo.image_name}}">
-
-			{{#each images}}
+			{{#each photo}}
 			<div>
-				<a href="{{this.url}}" target="_blank"><img src="{{this.url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" /></a>
+				<img src="{{this.url}}" alt="" class="thumbnail" />
 			</div>
 			{{/each}}
 		</div>
