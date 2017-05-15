@@ -40,6 +40,9 @@ Template.meteo.helpers({
             console.log(data);
 
             return {
+                size: {
+                    height: 600,
+                },
                 data: {
                     x : "x",
                     columns: [
@@ -61,13 +64,10 @@ Template.meteo.helpers({
                         tick: {
                             format: '%H h',
                             culling: {
-                                max: 4 // the number of tick texts will be adjusted to less than this value
+                                max: 6 // the number of tick texts will be adjusted to less than this value
                             }
                         }
                     },
-                },
-                zoom: {
-                    enabled: true
                 },
                 tooltip: {
                     format: {
