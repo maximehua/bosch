@@ -16,7 +16,6 @@ Meteor.methods({
         if (typeof(user) === 'undefined') {
             user = process.env.USER;
             password = process.env.PASSWORD;
-            console.log(user,password);
 
         }
 
@@ -32,11 +31,9 @@ Meteor.methods({
             }
             else{
 
-
                 var nosParcelles = [
                     "10359316077825617",
-                    "10359316077825823",
-                    "10359316075863420"
+                    "10359316077825823"
                 ];
 
                 var parcelles = result.data.content.filter((d)=>{
@@ -69,7 +66,6 @@ Meteor.methods({
         if (typeof(user) === 'undefined') {
             user = process.env.USER;
             password = process.env.PASSWORD;
-            console.log(user,password);
 
         }
         var auth = user+":"+password;
@@ -101,6 +97,12 @@ Meteor.methods({
         var urlquest='http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/images';
         var user = Meteor.settings.USER;
         var password = Meteor.settings.PASSWORD;
+
+        if (typeof(user) === 'undefined') {
+            user = process.env.USER;
+            password = process.env.PASSWORD;
+
+        }
         var auth = user+":"+password;
 
         console.log(urlquest);
@@ -130,6 +132,12 @@ Meteor.methods({
         var urlquest='http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/images/' + photoId;
         var user = Meteor.settings.USER;
         var password = Meteor.settings.PASSWORD;
+
+        if (typeof(user) === 'undefined') {
+            user = process.env.USER;
+            password = process.env.PASSWORD;
+
+        }
         var auth = user+":"+password;
 
         console.log(urlquest);
@@ -145,8 +153,7 @@ Meteor.methods({
                 console.log("error");
             }
             else{
-                console.log(photo.isImage());
-                // photo.isImage();
+                console.log("isImage :",photo.isImage());
 
                 Images.insert(photo, function (err, fileObj) {
                     if (err) {
@@ -162,19 +169,5 @@ Meteor.methods({
             }
         })
 
-        // HTTP.call('GET', urlquest, { auth: auth },(error, result)=>{
-        //     if (error) {
-        //         console.log(error);
-        //     }
-        //     else{
-        //         console.log(result);
-        //
-        //
-        //         Images.insert(result.data, function (err, fileObj) {
-        //           // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
-        //         });
-        //
-        //     }
-        // });
     },
 })
