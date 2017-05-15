@@ -1,11 +1,13 @@
 Template.meteo.helpers({
-    parcelle: function(){
+    parcelle: ()=>{
         Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
         var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
         return parcelle && parcelle;
     },
-
-    myChartData: function() {
+    dataName: ()=>{
+        return  FlowRouter.getParam("donnee")
+    },
+    myChartData: ()=>{
 
         var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
         console.log(parcelle);
@@ -52,7 +54,7 @@ Template.meteo.helpers({
                     x: {
                         type: 'timeseries',
                         tick: {
-                            format: '%HH',
+                            format: '%H h',
                             culling: {
                                 max: 4 // the number of tick texts will be adjusted to less than this value
                             }
@@ -62,14 +64,16 @@ Template.meteo.helpers({
                 zoom: {
                     enabled: true
                 },
-                // bar: {
-                //     width: {
-                //         ratio: 1,
-                //     }
-                // }
+                tooltip: {
+                    format: {
+                        value: function (value, ratio, id) {
+                            var format = id === 'value' ? d3.format(',') : d3.format('$');
+                            return format(value);
+                        }
+                    }
+                }
             }
         }
-
 
 
 

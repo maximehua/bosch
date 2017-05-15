@@ -12,7 +12,7 @@ sensors = {
     get : (data)=>{
         switch (data) {
             case "Hygrometrie":
-            return 0;
+            return "ARH_NAMI1_1";
             break;
             case "Pluviometrie":
             return 0;
@@ -27,7 +27,7 @@ sensors = {
             return "TS_AM1_1";
             break;
             case "HumiditeSol":
-            return "ARH_NAMI1_1";
+            return "WPS_AM1_1";
             break;
             default :
             return 0;
