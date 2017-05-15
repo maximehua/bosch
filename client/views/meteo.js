@@ -7,6 +7,9 @@ Template.meteo.helpers({
     dataName: ()=>{
         return  FlowRouter.getParam("donnee")
     },
+    dataAvailable: ()=>{
+        return Session.get("dataAvailable");
+    },
     myChartData: ()=>{
 
         var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
@@ -23,10 +26,12 @@ Template.meteo.helpers({
             var capteur = sensors.get(FlowRouter.getParam("donnee"));
             console.log(capteur);
 
+            Session.set("dataAvailable",true);
             _.each(filtered, (element, index, list)=>{
                 if (typeof element.values[capteur] !== "undefined") {
                     data.value.push(element.values[capteur]);
                     data.time.push(moment.utc(element.timestamp)._d);
+                    Session.set("dataAvailable",false);
                 }
 
             })

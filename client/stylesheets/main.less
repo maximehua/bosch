@@ -24,7 +24,7 @@ top: 0; bottom: 0; left: 0; right: 0;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-around;
-    height: 10rem;
+    height: 6rem;
 
 
 
@@ -51,6 +51,13 @@ top: 0; bottom: 0; left: 0; right: 0;
     }
 }
 
+.ui.secondary.pointing.menu .item{
+    border-bottom-width: 20px;
+}
+
+.ui.secondary.pointing.menu .active{
+    border-bottom-color: #60b3c6 !important;
+}
 
 
 // Calendar
@@ -122,4 +129,16 @@ top: 0; bottom: 0; left: 0; right: 0;
     tr {
         border: none;
     }
+}
+
+.noData{
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+
 }

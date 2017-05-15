@@ -13,8 +13,13 @@
 		<div class="ui calendar" id="calendar">
 		</div>
 	</div>
-	<div class="ui basic segment chart">
+	<div class="ui theChart basic segment chart">
 		{{> c3 myChartData}}
+		{{#if dataAvailable}}
+			<div class="noData">
+				No Data Available
+			</div>
+		{{/if}}
 	</div>
 	</div>
 
