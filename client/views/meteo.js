@@ -42,39 +42,42 @@ Template.meteo.helpers({
 
             return {
                 point: {
-                  show: false
-              },
-              size: {
-                height: 600,
-            },
-            data: {
-                x : "x",
-                columns: [
-                data.time,
-                data.value,
-                ],
-                type: "spline",
-                colors: {
-                    value: '#efb156',
-                    x: '#efb156',
+                    show: false
                 },
-            },
-            legend: {
-                show: false,
-            },
-            axis: {
-                x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: '%H h',
-                        culling: {
+                size: {
+                    height: 600,
+                },
+                data: {
+                    x : "x",
+                    columns: [
+                        data.time,
+                        data.value,
+                    ],
+                    type: "spline",
+                    colors: {
+                        value: '#efb156',
+                        x: '#efb156',
+                    },
+                    selection: {
+                        draggable: true
+                    }
+                },
+                legend: {
+                    show: false,
+                },
+                axis: {
+                    x: {
+                        type: 'timeseries',
+                        tick: {
+                            format: '%H h',
+                            culling: {
                                 max: 6 // the number of tick texts will be adjusted to less than this value
                             }
                         }
                     },
-                y:{
-                    format: function (d) { return d.toFixed(2); }
-                }
+                    y:{
+                        format: function (d) { return d.toFixed(2); }
+                    }
                 },
                 tooltip: {
                     format: {

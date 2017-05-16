@@ -1,6 +1,6 @@
 <template name="parcelle">
-	<div class="topBar">
-		<h2 class="ui header">
+	<div class="topBar anchor">
+		<h2 class="ui inverted header">
 			<i  class="back left chevron icon"><a href="/"></a></i>
 			<div class="content">
 				{{parcelle.attributes.Name}}
@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="content">
-		<div class="ui pointing three item secondary menu" id="menu-onglet">
+		<div class="ui pointing three item secondary inverted menu anchor" id="menu-onglet">
 			<a class="menuTab item {{tab.first}}" data-tab="first">Stade</a>
 			<a class="menuTab item {{tab.second}}" data-tab="second">Photo du Jour</a>
 			<a class="menuTab item {{tab.third}}" data-tab="third">Météo</a>

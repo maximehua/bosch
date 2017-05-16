@@ -19,7 +19,6 @@ top: 0; bottom: 0; left: 0; right: 0;
 }
 
 .topBar{
-    background: white !important;
     padding: 1rem !important;
     display: flex !important;
     flex-direction: column !important;
@@ -47,7 +46,7 @@ top: 0; bottom: 0; left: 0; right: 0;
     height: 100%;
     width: 100%;
     .ui.secondary.pointing.menu{
-        background: white;
+        border: none;
     }
 }
 
@@ -56,9 +55,28 @@ top: 0; bottom: 0; left: 0; right: 0;
 }
 
 .ui.secondary.pointing.menu .active{
-    border-bottom-color: #60b3c6 !important;
+    border-bottom-color: white !important;
 }
 
+
+
+// Helpers
+
+.flexbox-h{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+.flexbox-v{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between;
+}
+
+
+.anchor{
+    background: #60b3c6 !important;
+}
 
 // Calendar
 
@@ -93,28 +111,14 @@ top: 0; bottom: 0; left: 0; right: 0;
 .fc-toolbar{
     margin-bottom: 1em;
     position: relative;
-    background: white;
+    background: #60b3c6;
+    color: white;
     left: -1rem;
     top: -1rem;
     right: -1rem;
-    padding: 1rem;
+    padding: 0 1rem 1rem;
     width: ~"calc(100% + 2rem)";
 }
-
-
-// Helpers
-
-.flexbox-h{
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between;
-}
-.flexbox-v{
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between;
-}
-
 
 //Charts
 
