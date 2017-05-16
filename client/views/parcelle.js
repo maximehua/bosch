@@ -27,6 +27,9 @@ Template.parcelle.helpers({
         var photo = Images.find().fetch();
         return photo;
     },
+    remaining: ()=>{
+        return 7;
+    },
     gauge : ()=>{
         var dataMax = 10;
         var dataValue = 3;
