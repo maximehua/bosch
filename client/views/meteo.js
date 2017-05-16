@@ -5,7 +5,8 @@ Template.meteo.helpers({
         return parcelle && parcelle;
     },
     dataName: ()=>{
-        return  FlowRouter.getParam("donnee")
+        var capteur = sensors.get(FlowRouter.getParam("donnee"));
+        return  capteur.name;
     },
     dataAvailable: ()=>{
         return Session.get("dataAvailable");
@@ -28,8 +29,8 @@ Template.meteo.helpers({
 
             Session.set("dataAvailable",true);
             _.each(filtered, (element, index, list)=>{
-                if (typeof element.values[capteur] !== "undefined") {
-                    data.value.push(element.values[capteur]);
+                if (typeof element.values[capteur.sensor] !== "undefined") {
+                    data.value.push(element.values[capteur.sensor]);
                     data.time.push(moment.utc(element.timestamp)._d);
                     Session.set("dataAvailable",false);
                 }
@@ -71,11 +72,14 @@ Template.meteo.helpers({
                             }
                         }
                     },
+                y:{
+                    format: function (d) { return d.toFixed(2); }
+                }
                 },
                 tooltip: {
                     format: {
                         value: function (value, ratio, id) {
-                            return value.toFixed(2)+"%";
+                            return value.toFixed(2)+capteur.unit;
                         }
                     }
                 }

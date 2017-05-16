@@ -12,22 +12,46 @@ sensors = {
     get : (data)=>{
         switch (data) {
             case "Hygrometrie":
-            return "ARH_NAMI1_1";
+            return {
+                sensor : "ARH_NAMI1_1",
+                name: "Hygrometrie",
+                unit: "%"
+            };
             break;
             case "Pluviometrie":
-            return 0;
+            return {
+                sensor : 0,
+                name: "Pluviometrie",
+                unit: "ml"
+            };
             break;
             case "Vent":
-            return 0;
+            return {
+                sensor : 0,
+                name: "Vent",
+                unit: "m/s"
+            };;
             break;
             case "TemperatureAir":
-            return "TA_NAMI1_1";
+            return {
+                sensor : "TA_NAMI1_1",
+                name: "Temperature Air",
+                unit: "°C"
+            };
             break;
             case "TemperatureSol":
-            return "TS_AM1_1";
+            return {
+                sensor : "TS_AM1_1",
+                name: "Temperature Sol",
+                unit: "°C"
+            };
             break;
             case "HumiditeSol":
-            return "WPS_AM1_1";
+            return {
+                sensor : "WPS_AM1_1",
+                name: "Humidité Sol",
+                unit: "%"
+            };
             break;
             default :
             return 0;
