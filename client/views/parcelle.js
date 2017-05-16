@@ -26,20 +26,47 @@ Template.parcelle.helpers({
     photo: ()=>{
         var photo = Images.find().fetch();
         return photo;
-    }
+    },
+    gauge : ()=>{
+        var dataMax = 10;
+        var dataValue = 3;
+        return {
+            size: {
+                height: 300,
+            },
+            data: {
+                columns: [
+                    ['data', dataValue]
+                ],
+                type: 'gauge',
 
-});
+            },
+            gauge: {
+                   label: {
+                       format: function(value, ratio) {
+                           return dataMax-dataValue;
+                       },
+                       show: false // to turn off the min/max labels.
+                   },
+               min: 0,
+               max: dataMax,
+               units: ' days',
+               width: 20,
+            },
+            color: {
+                pattern: ['#FF0000', '#F6C600', '#60B044'],
+                threshold: {
+                    values: [2, 5, 10]
+                }
+            }
+        }
+    }
+})
 //
 Template.parcelle.onRendered(()=>{
     Meteor.setTimeout(()=>{
         $('#menu-onglet .item').tab();
-        $('#stade-compteur')
-        .progress({
-            label: 'ratio',
-            text: {
-                ratio: '{left}'
-            }
-        });
+
     },100);
 })
 //

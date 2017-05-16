@@ -15,15 +15,21 @@
 			<a class="menuTab item {{tab.second}}" data-tab="second">Photo du Jour</a>
 			<a class="menuTab item {{tab.third}}" data-tab="third">Météo</a>
 		</div>
-		<div class="ui tab basic segment {{tab.first}}" data-tab="first">
+		<div id="stade" class="ui tab basic segment {{tab.first}}" data-tab="first">
+			<div id="stade-gauge">
 
-			<div class="ui large olive progress" data-value="1" data-total="3" id="stade-compteur">
-				<div class="bar">
-					<div class="progress"></div>
-				</div>
-				<div class="label">Semaines avant prochain stade</div>
+				{{> c3 gauge}}
+					<div class="valeur">
+					  <div class="ui statistic">
+					    <div class="value">
+					      27
+					    </div>
+					    <div class="label">
+					      Red
+					    </div>
+					</div>
+				  </div>
 			</div>
-
 			<div class="ui horizontal list flexbox-h">
 				<div class="item">
 
@@ -106,7 +112,7 @@
 		</div>
 		<div class="ui tab basic segment {{tab.third}}" data-tab="third">
 
-			<div class="ui vertical borderless fluid labeled icon menu">
+			<div class="ui vertical fluid labeled icon menu">
 				<a  href="/parcelle/{{parcelle._id}}/meteo/Hygrometrie" class="item">
 					<i class="umbrella icon green"></i>
 					Hygrometrie

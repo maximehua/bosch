@@ -11,8 +11,8 @@ body{
     top: 0; bottom: 0; left: 0; right: 0;
 }
 main{
-position: absolute;
-top: 0; bottom: 0; left: 0; right: 0;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
     display: flex !important;
     flex-direction: column !important;
 
@@ -58,6 +58,11 @@ top: 0; bottom: 0; left: 0; right: 0;
     border-bottom-color: white !important;
 }
 
+.tab.basic.segment{
+    margin: 0;
+    top: -1rem;
+    position: relative;
+}
 
 
 // Helpers
@@ -122,54 +127,73 @@ top: 0; bottom: 0; left: 0; right: 0;
 
 //Charts
 
-#chart .c3-axis-y, #chart .c3-axis-x {
-  stroke-width: 0;
+#stade-gauge{
+        margin-bottom: 200px;
+    .c3-gauge-value{
+        display: none;
+    }
+    .gauge-value{
+        position: relative;
+        top: -4rem;
+    }
+    .c3-gauge-value{
+    font-size: 2rem !important;
+    }
 }
 
 .chart{
+
     position: absolute !important;
     bottom: 0;
     left: 0;
     right: 0;
-}
-.c3-tooltip-container{
-    top: 0px !important;
-    border-radius: 500rem;
-    overflow: hidden;
-    height: 200px !important;
-    width: 200px !important;
-    .c3-tooltip{
+    .valeur{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+        .c3-tooltip-container{
+        top: 0px !important;
+        border-radius: 500rem;
+        overflow: hidden;
         height: 200px !important;
         width: 200px !important;
+        .c3-tooltip{
+            height: 200px !important;
+            width: 200px !important;
+        }
+        .name{
+            display: none;
+        }
+        th, td {
+            font-size: 1rem;
+            padding: 1rem;
+            border: none;
+            text-align: center;
+        }
+        th {
+            background: #60b3c6;
+
+        }
+        tr {
+            border: none;
+        }
     }
-    .name{
-        display: none;
+    .c3-axis-y, #chart .c3-axis-x {
+        stroke-width: 0;
     }
-    th, td {
-        font-size: 1rem;
-        padding: 1rem;
-        border: none;
+    .c3-line {
+        stroke-width: 10px !important;
+    }
+    .noData{
         text-align: center;
-    }
-    th {
-        background: #60b3c6;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
 
     }
-    tr {
-        border: none;
-    }
-}
-.c3-line {
-    stroke-width: 10px !important;
-}
-.noData{
-    text-align: center;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-
 }
