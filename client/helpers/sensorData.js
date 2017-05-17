@@ -1,14 +1,4 @@
 sensors = {
-    sensorList : [
-        "TS_AM1_1",
-        "TS_AM1_2",
-        "TS_AM1_3",
-        "TA_NAMI1_1",
-        "AP_NAMI1_1",
-        "ARH_NAMI1_1",
-        "PAR_SG_1",
-        "PAR_AM1_X",
-    ],
     get : (data)=>{
         switch (data) {
             case "Hygrometrie":

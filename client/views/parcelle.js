@@ -1,9 +1,12 @@
+Template.parcelle.onCreated(()=>{
+    // Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
+    // Meteor.call("getParcellePhotos",FlowRouter.getParam("id"));
+})
+
 Template.parcelle.helpers({
     parcelle: ()=>{
-        Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
-        Meteor.call("getParcellePhotos",FlowRouter.getParam("id"));
-        var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
 
+        var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
         return parcelle && parcelle;
     },
     tab : ()=>{
@@ -24,8 +27,15 @@ Template.parcelle.helpers({
         return tab;
     },
     photo: ()=>{
-        var photo = Images.find().fetch();
-        return photo;
+        var photo = Images.find({ "meta.module_id": FlowRouter.getParam("id") }).fetch();
+        var today = moment();
+        if ( typeof photo != 'undefined') {
+            photo = photo.filter((d)=>{
+                return moment(d.meta.time).isSame(today, 'day')
+            })
+        }
+
+        return photo[0];
     },
     remaining: ()=>{
         return 7;

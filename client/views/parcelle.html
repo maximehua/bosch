@@ -102,17 +102,17 @@
 
 		</div>
 		<div class="ui tab basic segment {{tab.second}}" data-tab="second">
-			<img class="ui image fluid" src="/placeholder.png" alt="" />
 
-			<!-- {{#each photo}}
-			<div>
-				<img src="{{this.url}}" alt="" class="thumbnail" />
-			</div>
-			{{/each}} -->
+			<img id="dailyPhoto" class="ui image fluid" src="{{photo.url}}"  />
+
 		</div>
 		<div class="ui tab basic segment {{tab.third}}" data-tab="third">
 
 			<div class="ui vertical fluid labeled icon menu">
+				<a  href="/parcelle/{{parcelle._id}}/meteo/Photo" class="item">
+					<i class="camera icon green"></i>
+					Photo
+				</a>
 				<a  href="/parcelle/{{parcelle._id}}/meteo/Hygrometrie" class="item">
 					<i class="umbrella icon green"></i>
 					Hygrometrie

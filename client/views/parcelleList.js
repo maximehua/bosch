@@ -1,14 +1,13 @@
 Template.parcelleList.helpers({
     parcelles: function(){
-        Meteor.call("getParcelles");
         var parcelles = Parcelles.find().fetch();
         return parcelles && parcelles;
     }
 });
 //
-// Template.layout.onRendered(()=>{
-//
-// })
+Template.parcelleList.onCreated(()=>{
+    // Meteor.call("getParcelles");
+})
 //
 //
 // Template.layout.events({

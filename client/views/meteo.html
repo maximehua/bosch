@@ -14,7 +14,11 @@
 		</div>
 	</div>
 	<div class="ui theChart basic segment chart">
-		{{> c3 myChartData}}
+		{{#if displayPhoto}}
+			<img id="dailyPhoto" class="ui image fluid" src="{{photo.url}}"  />
+			{{else}}
+			{{> c3 myChartData}}
+		{{/if}}
 		{{#if dataAvailable}}
 			<div class="noData">
 				No Data Available

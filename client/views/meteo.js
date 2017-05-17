@@ -1,6 +1,5 @@
 Template.meteo.helpers({
     parcelle: ()=>{
-        Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
         var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
         return parcelle && parcelle;
     },
@@ -10,6 +9,24 @@ Template.meteo.helpers({
     },
     dataAvailable: ()=>{
         return Session.get("dataAvailable");
+    },
+    photo: ()=>{
+
+        Session.set("dataAvailable",true);
+        var photo = Images.find({ "meta.module_id": FlowRouter.getParam("id") }).fetch();
+        if ( typeof photo != 'undefined') {
+            photo = photo.filter((d)=>{
+                return moment(d.meta.time).isSame(Session.get("day"), 'day')
+            })
+        }
+        if ( typeof photo[0]!= "undefined") {
+            Session.set("dataAvailable",false);
+        }
+        console.log(photo);
+        return photo[0]
+    },
+    displayPhoto: ()=>{
+        return FlowRouter.getParam("donnee")==="Photo";
     },
     myChartData: ()=>{
 
@@ -97,6 +114,7 @@ Template.meteo.helpers({
 //
 Template.meteo.onRendered(()=>{
     Meteor.setTimeout(()=>{
+        Session.set("day", moment().format('YYYY-MM-DD'));
 
         $('#calendar').fullCalendar({
             currentDay : Session.get("day"),

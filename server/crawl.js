@@ -1,4 +1,16 @@
 Meteor.startup(function () {
+    authi = {
+        user : ()=>{
+            var user = Meteor.settings.USER;
+            if (typeof(user) === 'undefined')   user = process.env.USER;
+            return user;
+        },
+        password : ()=>{
+            var pass = Meteor.settings.PASSWORD;
+            if (typeof(user) === 'undefined')   user = process.env.PASSWORD;
+            return pass;
+        },
+    }
 
 
 });
@@ -9,28 +21,14 @@ Meteor.methods({
 
     getParcelles : function(){
 
-        var urlquest='http://pa.apps.bosch-iot-cloud.com/api/v1/modules?page=0&size=100';
-        var user = Meteor.settings.USER;
-        var password = Meteor.settings.PASSWORD;
-
-        if (typeof(user) === 'undefined') {
-            user = process.env.USER;
-            password = process.env.PASSWORD;
-
-        }
-
-
-        var auth = user+":"+password;
-
-        console.log(urlquest);
+        var auth = authi.user()+":"+authi.password();
+        console.log("--------");
+        console.log("getParcelles");
         console.log("--------");
 
-        HTTP.call('GET', urlquest, { auth: auth },(error, result)=>{
-            if (error) {
-                console.log(error);
-            }
+        HTTP.call('GET', 'http://pa.apps.bosch-iot-cloud.com/api/v1/modules?page=0&size=100', { auth: auth },(error, result)=>{
+            if (error) { console.log("error"); }
             else{
-
                 var nosParcelles = [
                     "10359316077825617",
                     "10359316077825823"
@@ -59,26 +57,15 @@ Meteor.methods({
     },
     getParcelleInfos : function(id){
 
-        var urlquest='http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/history?start=2010-01-1T10:45:27.00Z&end=2020-01-1T10:45:26.00Z';
-        var user = Meteor.settings.USER;
-        var password = Meteor.settings.PASSWORD;
 
-        if (typeof(user) === 'undefined') {
-            user = process.env.USER;
-            password = process.env.PASSWORD;
-
-        }
-        var auth = user+":"+password;
-
-        console.log(urlquest);
+        var auth = authi.user()+":"+authi.password();
+        console.log("--------");
+        console.log("getParcelleInfos");
         console.log("--------");
 
-        HTTP.call('GET', urlquest, { auth: auth },(error, result)=>{
-            if (error) {
-                console.log(error);
-            }
+        HTTP.call('GET', 'http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/history?start=2010-01-1T10:45:27.00Z&end=2020-01-1T10:45:26.00Z', { auth: auth },(error, result)=>{
+            if (error) { console.log("error"); }
             else{
-
                 Parcelles.update(
                     { _id: id},{
                         $set: {
@@ -86,33 +73,25 @@ Meteor.methods({
                         },
                     },
                     { upsert : true,}
-                );
-
+                )
             }
         });
     },
 
     getParcellePhotos : function(id){
 
-        var urlquest='http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/images';
-        var user = Meteor.settings.USER;
-        var password = Meteor.settings.PASSWORD;
 
-        if (typeof(user) === 'undefined') {
-            user = process.env.USER;
-            password = process.env.PASSWORD;
-
-        }
-        var auth = user+":"+password;
-
-        console.log(urlquest);
+        var auth = authi.user()+":"+authi.password();
+        console.log("--------");
+        console.log("getParcellePhotos");
         console.log("--------");
 
-        HTTP.call('GET', urlquest, { auth: auth },(error, result)=>{
-            if (error) {
-                console.log(error);
-            }
+        HTTP.call('GET', 'http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/images', { auth: auth },(error, result)=>{
+            if (error) { console.log("error"); }
             else{
+
+
+                var parcelle = Images.find().fetch();
 
                 Parcelles.update(
                     { _id: id},{
@@ -123,51 +102,77 @@ Meteor.methods({
                     { upsert : true,}
                 );
 
+                var newPhotos = result.data;
+
+                if ( typeof parcelle != "undefined") {
+                    readyPhotos = _.pluck(parcelle, "_id");
+                    newPhotos = result.data.filter((d)=>{
+                        return readyPhotos.indexOf(d.id) == -1
+                    });
+                }
+
+                _.each(newPhotos, (element, index, list)=>{
+                    var photo = new FS.File();
+                    photo._id = element.id;
+                    photo.meta = {
+                        module_id : id,
+                        time : element.time,
+                        image_time : element.image_time,
+                    }
+
+                     photo.attachData('http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/images/' + element.id, {
+                         type : "image/png",
+                         auth : auth
+                     },(error, result)=>{
+                         if (error) { console.log(error); }
+                         else{
+
+                             Images.insert(photo, function (err, fileObj) {
+                                 if (err) {
+                                     console.log("error");
+                                     console.log(err);
+                                 }
+                                 else{
+                                     console.log("success");
+                                 }
+                             });
+                         }
+                     })
+
+                })
             }
         });
     },
 
-    getParcellePhoto : function(id,photoId){
-
-        var urlquest='http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/images/' + photoId;
-        var user = Meteor.settings.USER;
-        var password = Meteor.settings.PASSWORD;
-
-        if (typeof(user) === 'undefined') {
-            user = process.env.USER;
-            password = process.env.PASSWORD;
-
-        }
-        var auth = user+":"+password;
-
-        console.log(urlquest);
-        console.log("--------");
-
-
-        var photo = new FS.File();
-        photo.attachData(urlquest, {
-            type : "image/png",
-            auth : auth
-        },(error, result)=>{
-            if (error) {
-                console.log("error");
-            }
-            else{
-                console.log("isImage :",photo.isImage());
-
-                Images.insert(photo, function (err, fileObj) {
-                    if (err) {
-                        console.log("error");
-                        console.log(err);
-                    }
-                    else{
-                        console.log("success");
-                        console.log(fileObj);
-
-                    }
-                });
-            }
-        })
-
-    },
+    // getParcellePhoto : function(id,photoId){
+    //
+    //     var auth = authi.user()+":"+authi.password();
+    //     console.log("--------");
+    //     console.log("getParcellePhoto");
+    //     console.log("--------");
+    //
+    //     var photo = new FS.File();
+    //     photo._id = photoId;
+    //     photo.attachData('http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/images/' + photoId, {
+    //         type : "image/png",
+    //         auth : auth
+    //     },(error, result)=>{
+    //         if (error) { console.log("error"); }
+    //         else{
+    //
+    //             Images.insert(photo, function (err, fileObj) {
+    //                 if (err) {
+    //                     console.log("error");
+    //                     console.log(err);
+    //                 }
+    //                 else{
+    //                     console.log("success");
+    //                     console.log(fileObj);
+    //
+    //                 }
+    //             });
+    //         }
+    //     })
+    //
+    // },
 })
