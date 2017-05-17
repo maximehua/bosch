@@ -7,7 +7,7 @@ Meteor.startup(function () {
         },
         password : ()=>{
             var pass = Meteor.settings.PASSWORD;
-            if (typeof(pass) === 'undefined')   user = process.env.PASSWORD;
+            if (typeof(pass) === 'undefined')   pass = process.env.PASSWORD;
             return pass;
         },
     }
