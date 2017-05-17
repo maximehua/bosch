@@ -110,7 +110,6 @@ Meteor.methods({
                         return readyPhotos.indexOf(d.id) == -1
                     });
                 }
-
                 _.each(newPhotos, (element, index, list)=>{
                     var photo = new FS.File();
                     photo._id = element.id;

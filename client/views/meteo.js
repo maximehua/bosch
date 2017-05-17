@@ -14,6 +14,8 @@ Template.meteo.helpers({
 
         Session.set("dataAvailable",true);
         var photo = Images.find({ "meta.module_id": FlowRouter.getParam("id") }).fetch();
+        console.log(photo);
+
         if ( typeof photo != 'undefined') {
             photo = photo.filter((d)=>{
                 return moment(d.meta.time).isSame(Session.get("day"), 'day')
@@ -22,7 +24,6 @@ Template.meteo.helpers({
         if ( typeof photo[0]!= "undefined") {
             Session.set("dataAvailable",false);
         }
-        console.log(photo);
         return photo[0]
     },
     displayPhoto: ()=>{
@@ -31,8 +32,6 @@ Template.meteo.helpers({
     myChartData: ()=>{
 
         var parcelle = Parcelles.findOne({ _id: FlowRouter.getParam("id") });
-        console.log(parcelle);
-
         if ( typeof parcelle !== "undefined") {
             console.log(Session.get("day"));
             var filtered = parcelle.data.filter((d)=>{ return moment(d.timestamp).isSame(Session.get("day"), 'day')  })
@@ -42,7 +41,6 @@ Template.meteo.helpers({
             };
 
             var capteur = sensors.get(FlowRouter.getParam("donnee"));
-            console.log(capteur);
 
             Session.set("dataAvailable",true);
             _.each(filtered, (element, index, list)=>{

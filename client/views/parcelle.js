@@ -1,6 +1,6 @@
 Template.parcelle.onCreated(()=>{
-    // Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
-    // Meteor.call("getParcellePhotos",FlowRouter.getParam("id"));
+    Meteor.call("getParcelleInfos",FlowRouter.getParam("id"));
+    Meteor.call("getParcellePhotos",FlowRouter.getParam("id"));
 })
 
 Template.parcelle.helpers({

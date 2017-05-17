@@ -5,9 +5,9 @@ Template.parcelleList.helpers({
     }
 });
 //
-Template.parcelleList.onCreated(()=>{
-    // Meteor.call("getParcelles");
-})
+// Template.parcelleList.onCreated(()=>{
+//     // Meteor.call("getParcelles");
+// })
 //
 //
 // Template.layout.events({
