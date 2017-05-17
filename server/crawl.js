@@ -27,7 +27,7 @@ Meteor.methods({
         console.log("--------");
 
         HTTP.call('GET', 'http://pa.apps.bosch-iot-cloud.com/api/v1/modules?page=0&size=100', { auth: auth },(error, result)=>{
-            if (error) { console.log(error.statusCode); }
+            if (error) { console.log(error.response.statusCode); }
             else{
                 var nosParcelles = [
                     "10359316077825617",
@@ -64,7 +64,7 @@ Meteor.methods({
         console.log("--------");
 
         HTTP.call('GET', 'http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/history?start=2010-01-1T10:45:27.00Z&end=2020-01-1T10:45:26.00Z', { auth: auth },(error, result)=>{
-            if (error) { console.log(error.statusCode); }
+            if (error) { console.log(error.response.statusCode); }
             else{
                 Parcelles.update(
                     { _id: id},{
@@ -87,7 +87,7 @@ Meteor.methods({
         console.log("--------");
 
         HTTP.call('GET', 'http://pa.apps.bosch-iot-cloud.com/api/v1/modules/' + id + '/images', { auth: auth },(error, result)=>{
-            if (error) { console.log(error.statusCode); }
+            if (error) { console.log(error.response.statusCode); }
             else{
 
 
@@ -123,7 +123,7 @@ Meteor.methods({
                          type : "image/png",
                          auth : auth
                      },(error, result)=>{
-                         if (error) { console.log(error.statusCode); }
+                         if (error) { console.log(error.response.statusCode); }
                          else{
 
                              Images.insert(photo, function (err, fileObj) {
