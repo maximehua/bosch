@@ -31,6 +31,7 @@ cfs:upload-http@0.0.20
 cfs:worker@0.1.4
 check@1.2.5
 d3js:d3@3.5.8
+datariot:ganalytics@0.2.1
 dburles:collection-helpers@1.1.0
 dburles:mongo-collection-instances@0.3.5
 ddp@1.2.5

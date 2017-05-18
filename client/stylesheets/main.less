@@ -1,6 +1,8 @@
+@import 'variables';
 
 html{
     font-size: 34px;
+    font: @sans-serif;
 }
 
 // Layout
@@ -80,7 +82,7 @@ main{
 
 
 .anchor{
-    background: #60b3c6 !important;
+    background: @main-anchor !important;
 }
 
 // Calendar
@@ -89,10 +91,11 @@ main{
     padding: 1rem !important;
 }
 .fc-unthemed .fc-today{
-    background: gray;
+    background: rgba(0,0,0,0.2);
 }
 .fc-unthemed .fc-state-highlight{
-    background: #60b3c6;
+    background: @main-anchor;
+
 }
 #calendar button{
     background: white !important;
@@ -116,7 +119,7 @@ main{
 .fc-toolbar{
     margin-bottom: 1em;
     position: relative;
-    background: #60b3c6;
+    background: @main-anchor;
     color: white;
     left: -1rem;
     top: -1rem;
@@ -181,7 +184,7 @@ main{
             text-align: center;
         }
         th {
-            background: #60b3c6;
+            background: @main-anchor;
 
         }
         tr {

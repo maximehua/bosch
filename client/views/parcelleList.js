@@ -4,12 +4,8 @@ Template.parcelleList.helpers({
         return parcelles && parcelles;
     }
 });
-//
-// Template.parcelleList.onCreated(()=>{
-//     // Meteor.call("getParcelles");
-// })
-//
-//
-// Template.layout.events({
-//
-// })
+
+Template.parcelleList.onRendered(()=>{
+    GAnalytics.pageview();
+    GAnalytics.pageview(FlowRouter.current().path);
+})

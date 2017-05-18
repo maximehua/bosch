@@ -25,7 +25,6 @@ Meteor.methods({
         console.log("--------");
         console.log("getParcelles");
         console.log("--------");
-        console.log(auth);
 
         HTTP.call('GET', 'http://pa.apps.bosch-iot-cloud.com/api/v1/modules?page=0&size=100', { auth: auth },(error, result)=>{
             if (error) { console.log(error.response.statusCode); }

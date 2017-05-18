@@ -77,6 +77,8 @@ Template.parcelle.helpers({
 })
 //
 Template.parcelle.onRendered(()=>{
+    GAnalytics.pageview();
+    GAnalytics.pageview(FlowRouter.current().path);
     Meteor.setTimeout(()=>{
         $('#menu-onglet .item').tab();
 

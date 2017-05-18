@@ -4,8 +4,13 @@ Template.meteo.helpers({
         return parcelle && parcelle;
     },
     dataName: ()=>{
-        var capteur = sensors.get(FlowRouter.getParam("donnee"));
-        return  capteur.name;
+        if (FlowRouter.getParam("donnee")=="Photos") {
+            return "Photos"
+        }
+        else{
+             var capteur = sensors.get(FlowRouter.getParam("donnee"));
+             return  capteur.name;
+        }
     },
     dataAvailable: ()=>{
         return Session.get("dataAvailable");
@@ -27,7 +32,7 @@ Template.meteo.helpers({
         return photo[0]
     },
     displayPhoto: ()=>{
-        return FlowRouter.getParam("donnee")==="Photo";
+        return FlowRouter.getParam("donnee")==="Photos";
     },
     myChartData: ()=>{
 
@@ -131,11 +136,12 @@ Template.meteo.onRendered(()=>{
 })
 
 
-//
-// Template.layout.onRendered(()=>{
-//
-// })
-//
+
+Template.meteo.onRendered(()=>{
+    GAnalytics.pageview();
+    GAnalytics.pageview(FlowRouter.current().path);
+})
+
 //
 // Template.layout.events({
 //
